@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author liuhongwei
+ * @author lhw
  * @title
  * @description
- * @company 好未来-学而思思维
- * @mobile 13311560290
  * @created 7/8/21 5:18 PM
  * @changeRecord
  */

@@ -1,7 +1,9 @@
 package com.lhw.netty;
 
+import com.lhw.netty.filter.IHttpRequestFilter;
+import com.lhw.netty.filter.IHttpResponseFilter;
 import com.lhw.netty.httpClient.HttpClientUtil;
-import com.lhw.netty.route.HttpRoute;
+import com.lhw.netty.route.IHttpRoute;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -37,13 +39,25 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
     private static List<String> proxyServers = Arrays.asList("https://www.baidu.com", "https://www.json.cn");
 
     @Resource
-    private HttpRoute httpRoute;
+    private IHttpRoute httpRoute;
 
-    public static HttpRoute httpRouteInit;
+    @Resource
+    private IHttpRequestFilter requestFilter;
+
+    @Resource
+    private IHttpResponseFilter responseFilter;
+
+    public static IHttpRoute httpRouteInit;
+
+    public static IHttpRequestFilter requestFilterInit;
+
+    public static IHttpResponseFilter responseFilterInit;
 
     @PostConstruct
     public void init() {
         httpRouteInit = httpRoute;
+        requestFilterInit = requestFilter;
+        responseFilterInit = responseFilter;
     }
 
     @Override
@@ -70,14 +84,16 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
         System.out.println("proxyServers:" + proxyServers);
         String url = httpRouteInit.route(proxyServers);
         System.out.println("url:" + url);
+        requestFilterInit.filter(fullRequest, ctx);
+        System.out.println("header requestFilter name:" + fullRequest.headers().get("name"));
         FullHttpResponse response = null;
         try {
-            // 对接上次作业的httpclient或者okhttp请求另一个url的响应数据
             String value = HttpClientUtil.get(url);
             response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(value.getBytes("UTF-8")));
             response.headers().set("Content-Type", "application/json");
             response.headers().setInt("Content-Length", response.content().readableBytes());
-
+            responseFilterInit.filter(response);
+            System.out.println("header responseFilter age:" + response.headers().get("age"));
         } catch (Exception e) {
             System.out.println("处理出错:" + e.getMessage());
             response = new DefaultFullHttpResponse(HTTP_1_1, NO_CONTENT);

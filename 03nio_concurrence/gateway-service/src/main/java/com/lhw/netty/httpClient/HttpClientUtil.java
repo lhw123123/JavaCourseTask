@@ -9,11 +9,9 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 /**
- * @author liuhongwei
+ * @author lhw
  * @title
  * @description
- * @company 好未来-学而思思维
- * @mobile 13311560290
  * @created 7/8/21 5:48 PM
  * @changeRecord
  */
@@ -32,7 +30,7 @@ public class HttpClientUtil {
             response = httpClient.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
                 String content = EntityUtils.toString(response.getEntity(), "utf-8");
-                System.out.println(content);
+                //System.out.println(content);
                 return content;
             }
         } finally {

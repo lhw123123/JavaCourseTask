@@ -13,7 +13,7 @@ import java.util.Random;
  * @changeRecord
  */
 @Service
-public class HttpRouteImpl implements HttpRoute {
+public class HttpRouteImpl implements IHttpRoute {
 
     @Override
     public String route(List<String> urls) {

@@ -9,7 +9,7 @@ import java.util.List;
  * @created 7/8/21 5:16 PM
  * @changeRecord
  */
-public interface HttpRoute {
+public interface IHttpRoute {
 
     /**
      * 随机路由

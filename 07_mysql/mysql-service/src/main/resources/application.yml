@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /mysql
+
+spring:
+  application:
+    name: mysql-service
+
+  datasource:
+    read:
+      username: root
+      password: 123456
+      url: jdbc:mysql://82.156.201.64:3306/shopping_mall?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true&allowMultiQueries=true&useCompression=true&useSSL=false&noAccessToProcedureBodies=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      test-on-borrow: true
+    write:
+      username: root
+      password: 123456
+      url: jdbc:mysql://82.156.201.64:3306/shopping_mall?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true&allowMultiQueries=true&useCompression=true&useSSL=false&noAccessToProcedureBodies=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      test-on-borrow: true

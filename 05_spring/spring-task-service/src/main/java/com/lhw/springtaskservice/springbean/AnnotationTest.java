@@ -1,5 +1,7 @@
 package com.lhw.springtaskservice.springbean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author liuhongwei
  * @title
@@ -9,5 +11,10 @@ package com.lhw.springtaskservice.springbean;
  * @created 7/29/21 4:46 PM
  * @changeRecord
  */
+@Component
 public class AnnotationTest {
+
+    private int age;
+
+    private String name;
 }
